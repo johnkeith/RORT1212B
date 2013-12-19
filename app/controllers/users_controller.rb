@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :signed_in_user, only: [:edit, :update]
+  
   def new
   	@user = User.new
 
@@ -12,12 +14,7 @@ class UsersController < ApplicationController
   			render 'new'
   		end
   	end
- end
-  	
-  def user_params
-  	params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
- 
+ end 
 
   def show
     @user = User.find(params[:id])
@@ -36,4 +33,15 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def signed_in_user
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    end
+
 end

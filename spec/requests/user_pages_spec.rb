@@ -75,11 +75,11 @@ describe "UserPages" do
     end
 
     describe "with valid information" do
-      let(:new_name) { "New Name"}
-      let(:new_email) { "NewEmail@example.com "}
+      let(:new_name)  { "New person" }
+      let(:new_email) { "newb@test.com" }
       before do
-        fill_in "Name", with: new_name
-        fill_in "Email", with: new_email
+        fill_in "Name",     with: new_name
+        fill_in "Email",    with: new_email
         fill_in "Password", with: user.password
         fill_in "Confirmation", with: user.password
         click_button "Save changes"
